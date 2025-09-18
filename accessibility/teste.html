@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual - Roupas e Acessórios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .header {
+            background-color: #333;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-link {
+            color: #666;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 15px;
+            display: inline-block;
+            width: 300px;
+        }
+        
+        .price {
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #aaa;
+        }
+        
+        .form-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            width: 100%;
+        }
+        
+        .error-text {
+            color: #ff6b6b;
+            font-size: 12px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+        }
+        
+        .video-container {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iNTAiIGZpbGw9IiNmZmYiLz48dGV4dCB4PSI1MCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9nbyBMb2phPC90ZXh0Pjwvc3ZnPg==" width="100" height="50">
+        
+        <nav>
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#produtos" class="nav-link">Produtos</a>
+            <a href="#sobre" class="nav-link">Sobre</a>
+            <a href="#contato" class="nav-link">Contato</a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <h1>Bem-vindos à nossa loja!</h1>
+        
+        <div class="search-section">
+            <input type="text" placeholder="Digite aqui para buscar produtos..." class="form-input">
+            <button class="btn" onclick="buscarProdutos()">🔍</button>
+        </div>
+
+        <h2>Produtos em Destaque</h2>
+        
+        <div class="product-card">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iI2RkZCIvPjx0ZXh0IHg9IjEwMCIgeT0iODAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q2FtaXNldGEgQXp1bDwvdGV4dD48L3N2Zz4=" width="200" height="150">
+            <h3>Camiseta Azul</h3>
+            <p class="price">R$ 49,90</p>
+            <button class="btn" onclick="adicionarCarrinho(1)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="product-card">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iI2RkZCIvPjx0ZXh0IHg9IjEwMCIgeT0iODAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q2Fsw6dhIEplYW5zPC90ZXh0Pjwvc3ZnPg==" width="200" height="150">
+            <h3>Calça Jeans</h3>
+            <p class="price">R$ 89,90</p>
+            <button class="btn btn-secondary">Esgotado</button>
+        </div>
+
+        <div class="newsletter-section">
+            <h2>Receba nossas ofertas!</h2>
+            <form>
+                <input type="email" placeholder="Seu e-mail" class="form-input">
+                <input type="text" placeholder="Nome" class="form-input">
+                <div class="error-text">Este campo é obrigatório</div>
+                <button type="submit" class="btn">Cadastrar</button>
+            </form>
+        </div>
+
+        <div class="video-container">
+            <h2>Conheça nossa coleção</h2>
+            <video width="400" height="300" controls autoplay>
+                <source src="#" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="rating-section">
+            <h3>Avalie nosso site</h3>
+            <div onclick="avaliar(1)">⭐</div>
+            <div onclick="avaliar(2)">⭐⭐</div>
+            <div onclick="avaliar(3)">⭐⭐⭐</div>
+            <div onclick="avaliar(4)">⭐⭐⭐⭐</div>
+            <div onclick="avaliar(5)">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <button class="btn" onclick="abrirModal()">Abrir Informações Importantes</button>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Informações Importantes</h2>
+            <p>Esta é uma informação muito importante sobre nossos produtos!</p>
+            <button onclick="fecharModal()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        function buscarProdutos() {
+            alert('Função de busca não implementada');
+        }
+
+        function adicionarCarrinho(id) {
+            alert('Produto ' + id + ' adicionado ao carrinho!');
+        }
+
+        function avaliar(nota) {
+            alert('Você avaliou com ' + nota + ' estrela(s)');
+        }
+
+        function abrirModal() {
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function fecharModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                fecharModal();
+            }
+        });
+    </script>
+</body>
+</html>
